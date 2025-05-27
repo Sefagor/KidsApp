@@ -116,7 +116,7 @@ public class Utils {
             eventDTO.setEventDate(event.getEventDate());
             eventDTO.setStatus(event.getStatus());
             eventDTO.setEventPhoto(event.getEventPhoto());
-            eventDTO.setEventLocation(event.getEventLocation().toString());
+            eventDTO.setEventLocation(mapLocationEntityToLocationDTO(event.getEventLocation()));
             bookingDTO.setEvent(eventDTO);
         }
         return bookingDTO;
