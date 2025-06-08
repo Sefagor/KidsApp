@@ -6,6 +6,36 @@
     overflow-x: hidden;
 }
 
+html, body {
+   overflow: hidden;
+}
+
+/* 1) Tüm belgeyi tam yüksekliğe çıkar */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding-top: 28px;
+}
+
+/* 2) Uygulama sarmalayıcısını flex kolona çevir */
+#root > .App {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: visible;
+}
+
+/* 3) Ana içerik alanı esnetsin */
+.content {
+    flex: 1 0 auto; /* büyüsün, ama minimum boyu içeriğe göre */
+}
+
+/* 4) Footer ise yalnızca içerik sonunda gözüksün */
+.App footer {
+    flex-shrink: 0; /* asla küçülmesin */
+}
+
+
 
 .colors {
     color: pink;
@@ -20,49 +50,107 @@
 
 /* General Navbar Styling */
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 70px 25px 75px;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #fff8eb;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
-    font-size: 20px;
+    font-size: 1rem;
+    z-index: 100;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Logo / Brand */
+.navbar-brand{
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
 
 .navbar-brand a {
-    font-size: 24px;
-    font-weight: bold;
-    color: #007F86;
+    font-size: 45px;
+    color: black;
     text-decoration: none;
 }
 
+.nav-herne-logo{
+    width: 50px;
+}
+
+/* Menü */
 .navbar-ul {
     list-style: none;
     display: flex;
     align-items: center;
-    margin: 0;
+    gap: 1.5rem;
+    margin-left: 100px;
     padding: 0;
-    flex-wrap: wrap;
-}
-
-.navbar-ul li {
-    margin-left: 20px;
 }
 
 .navbar-ul li a {
+    font-size: 22px;
+    color: #444;
     text-decoration: none;
-    color: #666;
-    transition: color 0.5s;
+    transition: color 0.3s, transform 0.3s;
 }
 
-.navbar-ul li a:hover {
-    color: #FF007F;
-    color: #FF7F50;
-}
-
+.navbar-ul li a:hover,
 .navbar-ul li a.active {
-    color: #FF7F50;
+    color: #2cc387;
+    transform: translateY(-2px);
+}
+
+/* Hamburger Menü (für Mobile) */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #444;
+    transition: background 0.3s;
+}
+
+@media (max-width: 768px) {
+    .navbar-ul {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 250px;
+        flex-direction: column;
+        padding-top: 5rem;
+        background: rgba(255,255,255,0.95);
+        transform: translateX(100%);
+        transition: transform 0.3s;
+        gap: 1rem;
+    }
+    .navbar-ul.open {
+        transform: translateX(0);
+    }
+    .nav-toggle {
+        display: flex;
+    }
 }
 
 .auth-container {
@@ -155,129 +243,191 @@ button[type="submit"]:hover {
 
 /**NAV BAR STYLING END HERE*/
 
-/* FOOTER STYKLING */
-.my-footer {
-    color: #f0e8e8;
-    background-color: #444;
-    padding: 20px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    font-weight: 500;
+/* FOOTER STYLING */
+/* frontend_app/src/components/Footer.css */
+
+/* Gesamter Footer */
+.footer {
+    background-color: #2c2c2c;
+    color: #ccc;
+    font-family: Arial, sans-serif;
+    font-size: 22px;
 }
+
+/* Oberer Abstand (visuelle Trennung) */
+.footer-top-spacer {
+    height: 20px;
+    background-color: transparent;
+}
+
+/* Hauptbereich mit vier Boxen */
+.footer-content.fullwidth {
+    padding: 2rem 5%;
+}
+.footer-content .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+/* Jede Box im Grid */
+.footer-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Logo & Adresse */
+.footer-logo img {
+    width: 80px;
+}
+.footer-address {
+    line-height: 1.6;
+}
+
+/* Link-Liste */
+.footer-links,
+.footer-legal {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.footer-links li,
+.footer-legal li {
+    margin-bottom: 0.5rem;
+}
+.footer-links a,
+.footer-legal a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.footer-links a:hover,
+.footer-legal a:hover {
+    color: #fff;
+}
+
+/* Externe Links-Icon */
+.footer-links a[target="_blank"]::after,
+.footer-legal a[target="_blank"]::after {
+    content: " ↗";
+    font-size: 0.8em;
+}
+
+/* Social Icons */
+.footer-social {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+.footer-social a img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s;
+}
+.footer-social a:hover img {
+    filter: brightness(0) invert(0.7);
+}
+
+/* Unterster Bereich */
+.footer-bottom.fullwidth {
+    background-color: #212121;
+    padding: 1rem 5%;
+}
+.footer-bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.footer-copy {
+    color: #777;
+}
+.footer-toplink a {
+    color: #777;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.footer-toplink a:hover {
+    color: #fff;
+}
+
 
 
 
 /*HOME PAGE STYLING STARTS HERE*/
 
+/* HomePage.css */
+
+.cta {
+    display: inline-block;
+    background-color: #2cc387;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.cta:hover {
+    background-color: #28a174;
+}
+
+/* src/styles/HomePage.css */
+
 .home {
-    margin-bottom: 100px;
-}
-
-/* HEADER */
-/* Header overlay */
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.overlay-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    justify-content: flex-start;
-}
-
-/* The header banner */
-.header-banner {
-    /* background-image: url("../public/assets/images/hotel.webp"); */
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    height: 80vh;
-}
-
-.header-banner {
-    position: relative;
-    height: 500px;
-}
-
-.header-banner h1 {
-    font-size: 50px;
-    color: #f8f3f3;
-}
-
-.header-banner h3 {
-    color: #f8f3f3;
-    font-size: 30px;
-}
-
-
-/*ROOM SEARCH STARTS HERE*/
-
-.search-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 20px;
-    margin-left: 45px;
+    flex-direction: column;
 }
 
+.divider {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    background: #000000;
+    padding: 2rem 1rem;
+    gap: 1rem;
+    height: 30vh;
+}
 
-.search-field {
-    flex: 0 0 calc(25% - 10px);
-    margin: 10px;
-    padding: 15px;
-    border: 1px solid #ddd;
+.card {
+    display: flex;
+    flex: 1;
+    background: #000000;
     border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.search-field label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #666;
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgb(110, 110, 110);
 }
 
-.search-field input,
-.search-field select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
+.icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: white;
 }
 
-
-.home-search-button {
-    margin-left: 10px;
-    padding: 15px 20px;
-    background-color: #007F86;
-    font-weight: 600;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+.card h3 {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    color: white;
 }
 
-.home-search-button:hover {
-    background-color: rgb(34, 80, 128)
-}
+.card p {
+    font-size: 0.9rem;
+    color: #555;    color: white;
 
+}
 
 
 
@@ -364,8 +514,7 @@ button[type="submit"]:hover {
 }
 
 .phegon-color {
-    color: #FF007F;
-    color: #FF7F50;
+    color: #2cc387;
 }
 
 .service-section {
