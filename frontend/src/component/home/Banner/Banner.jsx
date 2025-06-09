@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./Banner.module.css";
 import rathaus from "../../../assets/images/rathaus_herne.jpg";
-import RoomSearch from "../../common/RoomSearch";
+import RoomSearch from "../../common/EventSearch/EventSearch";
 
 const Banner = ({ onSearch }) => (
     <section className={styles.banner}>

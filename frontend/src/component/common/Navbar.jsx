@@ -25,7 +25,7 @@ function Navbar() {
                 </div>
                 <ul className="navbar-ul">
                     <li><NavLink to="/home" activeclassname="active">Home</NavLink></li>
-                    <li><NavLink to="/rooms" activeclassname="active">Events</NavLink></li>
+                    <li><NavLink to="/events" activeclassname="active">Events</NavLink></li>
                     <li><NavLink to="/find-booking" activeclassname="active">Find my Booking</NavLink></li>
 
                     {isUser && <li><NavLink to="/profile" activeclassname="active">Profile</NavLink></li>}

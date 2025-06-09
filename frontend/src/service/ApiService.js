@@ -146,6 +146,13 @@ export default class ApiService {
         return response.data;
     }
 
+    static async getEventById(eventId) {
+        const response = await axios.get(
+            `${this.BASE_URL}/events/event-by-id/${eventId}`
+        );
+        return response.data;
+    }
+
     static async updateRoom(roomId, formData) {
         const response = await axios.put(
             `${this.BASE_URL}/rooms/update/${roomId}`,

@@ -3,48 +3,51 @@ import React, { useState, useEffect } from 'react';
 import ApiService from '../../../service/ApiService';
 import styles from './KommendeVeranstalltungen.module.css';
 import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
+import EventCard from '../../common/EcentCard/EventCard';
 
 const UpcomingEventsSection = () => {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
-        // Tüm etkinlikleri getAllEvents kullanarak çek
+        // Öncelikle tüm etkinlikleri çek
         ApiService.getAllEvents()
             .then(data => {
-                // API farklı formatlarda dönebilir; array veya objenin eventList'i
                 const list = Array.isArray(data)
                     ? data
                     : Array.isArray(data.eventList)
                         ? data.eventList
                         : [];
-                setEvents(list);
+
+                // Bugünün tarih string’i (YYYY-MM-DD)
+                const today = new Date().toISOString().slice(0, 10);
+
+                // Bugüne denk düşen etkinlikleri filtrele ve en fazla 10 tanesini al
+                const todaysEvents = list
+                    .filter(evt => {
+                        const evtDate = (evt.eventDate || evt.date || '').slice(0, 10);
+                        return evtDate === today;
+                    })
+                    .slice(0, 10);
+
+                setEvents(todaysEvents);
             })
             .catch(err => console.error(err));
     }, []);
 
     return (
         <section className={styles.container}>
-            <h2 className={styles.title}>Kommende Veranstaltungen</h2>
-            <div className={styles.grid}>
-                {events.map(evt => (
-                    <div key={evt.id} className={styles.card}>
-                        <div className={styles.imageWrapper}>
-                            <img src={evt.imageUrl || evt.eventPhotoUrl || ''} alt={evt.title || evt.eventName} className={styles.image} />
-                            <div className={styles.overlay}>
-                                <p className={styles.description}>{evt.description || evt.eventDescription}</p>
-                                <div className={styles.meta}>
-                                    <span><FaCalendarAlt /> {evt.eventDate || evt.date}</span>
-                                    <span><FaMapMarkerAlt /> {(evt.eventLocation && evt.eventLocation.city) || evt.location}</span>
-                                </div>
-                                <button className={styles.button}>Mehr erfahren →</button>
-                            </div>
-                        </div>
-                        <div className={styles.info}>
-                            <h3 className={styles.eventTitle}>{evt.eventName || evt.title}</h3>
-                        </div>
-                    </div>
-                ))}
+            <div className={styles.titleBlock}>
+                <h2 className={styles.title}>Kommende Veranstaltungen</h2>
             </div>
+            {events.length === 0 ? (
+                <p className={styles.noEvents}>Heute keine Veranstaltungen.</p>
+            ) : (
+                <div className={styles.grid}>
+                    {events.map(evt => (
+                        <EventCard key={evt.id} event={evt} />
+                    ))}
+                </div>
+            )}
         </section>
     );
 };

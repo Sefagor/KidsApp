@@ -102,11 +102,6 @@ const FooterComponent = () => {
                     <div className="footer-copy">
                         © Stadt Herne 2025
                     </div>
-                    <div className="footer-toplink">
-                        <a href="#seitenanfang" title="Zum Seitenanfang">
-                            ↑
-                        </a>
-                    </div>
                 </div>
             </div>
         </footer>

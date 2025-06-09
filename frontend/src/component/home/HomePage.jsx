@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FaSmile, FaBook, FaRocket } from 'react-icons/fa';
 import RoomResult from '../common/RoomResult';
 import Banner from './Banner/Banner';
-import UpcomingEventsSection from './KommendeVeranstalltungen/KommendeVeranstalltungen';
+import KommendeVeranstalltungen from './KommendeVeranstalltungen/KommendeVeranstalltungen';
 
 const HomePage = () => {
     const [roomSearchResults, setRoomSearchResults] = useState([]);
@@ -36,7 +36,7 @@ const HomePage = () => {
                 </div>
             </div>
 
-            <UpcomingEventsSection />
+            <KommendeVeranstalltungen />
         </div>
     );
 };

@@ -6,8 +6,11 @@
     overflow-x: hidden;
 }
 
-html, body {
-   overflow: hidden;
+html{
+    overflow: hidden;
+}
+body{
+    overflow: visible;
 }
 
 /* 1) Tüm belgeyi tam yüksekliğe çıkar */
@@ -15,6 +18,7 @@ html, body, #root {
     height: 100%;
     margin: 0;
     padding-top: 28px;
+    scroll-behavior: smooth;
 }
 
 /* 2) Uygulama sarmalayıcısını flex kolona çevir */
@@ -22,12 +26,13 @@ html, body, #root {
     display: flex;
     flex-direction: column;
     height: 100%;
-    overflow: visible;
+    overflow-y: visible;
 }
 
 /* 3) Ana içerik alanı esnetsin */
 .content {
     flex: 1 0 auto; /* büyüsün, ama minimum boyu içeriğe göre */
+    min-height: 100vh;
 }
 
 /* 4) Footer ise yalnızca içerik sonunda gözüksün */
@@ -248,6 +253,8 @@ button[type="submit"]:hover {
 
 /* Gesamter Footer */
 .footer {
+    display: flex;
+    flex-direction: column;
     background-color: #2c2c2c;
     color: #ccc;
     font-family: Arial, sans-serif;
@@ -333,8 +340,13 @@ button[type="submit"]:hover {
 
 /* Unterster Bereich */
 .footer-bottom.fullwidth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    width: 100%;
     background-color: #212121;
-    padding: 1rem 5%;
+    padding: 1rem;
 }
 .footer-bottom-inner {
     display: flex;
@@ -494,16 +506,6 @@ button[type="submit"]:hover {
     background-color: rgb(34, 80, 128)
 }
 
-/*View all rooms home section*/
-.view-rooms-home {
-    margin: 15px 0px 0px 4.6rem;
-    font-size: 20px;
-    font-weight: 500;
-    text-decoration: underline;
-    color: #FF7F50;
-
-}
-
 
 /*Home services section*/
 .home-services {
@@ -611,14 +613,11 @@ button[type="submit"]:hover {
 
 /*ALL ROOMS PAGE STYLING ENDS*/
 
-/*PAGINATION COMPONENT STYLIMNG STARTS HERE*/
-
-
+/*PAGINATION COMPONENT STYLING*/
 .pagination-nav {
     display: flex;
     justify-content: center;
     padding: 10px;
-    /* Add padding for spacing */
 }
 
 .pagination-ul {
@@ -646,14 +645,10 @@ button[type="submit"]:hover {
     color: #fff;
 }
 
-/* Style for the current page button */
 .current-page {
     background-color: #007F86;
     color: #fff;
 }
-
-
-/*PAGINATION STYLING ENDS HERE*/
 
 /*ROOM DETAILS PAGE*/
 .room-details-booking {
