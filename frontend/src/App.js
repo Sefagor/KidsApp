@@ -10,7 +10,7 @@ import RegisterPage from './component/auth/RegisterPage';
 import HomePage from './component/home/HomePage';
 import AllRoomsPage from './component/booking_rooms/AllEvents/AllEvents';
 import RoomDetailsBookingPage from './component/booking_rooms/EventDetails/EventDetailsPage';
-import FindBookingPage from './component/booking_rooms/FindBookingPage';
+import FindBookingPage from './component/booking_rooms/MyEventPage/FindBookingPage';
 import AdminPage from './component/admin/AdminPage';
 import ManageRoomPage from './component/admin/ManageRoomPage';
 import EditRoomPage from './component/admin/EditRoomPage';

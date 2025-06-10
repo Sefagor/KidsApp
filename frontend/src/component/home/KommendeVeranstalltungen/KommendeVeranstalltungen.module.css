@@ -1,6 +1,6 @@
 .container {
     height: 100vh;
-    background-color: #f8f5f0;
+    background-color: #E7E8D1;
     overflow: hidden;
 }
 
@@ -16,7 +16,7 @@
     align-items: center;
     justify-content: center;
     padding: 4rem;
-    background-image: url('../../../assets/images/yellow_fence.jpg');
+    background-color: #B85042;
     margin-bottom: 4rem;
 }
 

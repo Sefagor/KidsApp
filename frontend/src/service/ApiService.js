@@ -185,6 +185,15 @@ export default class ApiService {
         return response.data;
     }
 
+    static async bookEvent(eventId, userId, booking) {
+        const response = await axios.post(
+            `${this.BASE_URL}/bookings/book-event/${eventId}/${userId}`,
+            booking,
+            { headers: this.getHeader() }
+        );
+        return response.data;
+    }
+
     static async getAllBookings() {
         const response = await axios.get(
             `${this.BASE_URL}/bookings/all`,

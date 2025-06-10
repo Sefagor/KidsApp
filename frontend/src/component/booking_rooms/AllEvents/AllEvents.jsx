@@ -49,8 +49,14 @@ const AllEventsPage = () => {
             </div>
 
             <div className={styles.eventGrid}>
-                {currentEvents.map(ev => (
-                    <EventCard key={ev.id} event={ev} />
+                {currentEvents.map((ev, idx) => (
+                    <div
+                        key={ev.id}
+                        className={styles.cardWrapper}
+                        style={{ animationDelay: `${idx * 100}ms` }}
+                    >
+                        <EventCard event={ev} />
+                    </div>
                 ))}
             </div>
 
