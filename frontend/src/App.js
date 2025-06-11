@@ -8,9 +8,9 @@ import FooterComponent from './component/common/Footer';
 import LoginPage from './component/auth/LoginPage';
 import RegisterPage from './component/auth/RegisterPage';
 import HomePage from './component/home/HomePage';
-import AllRoomsPage from './component/booking_rooms/AllRoomsPage';
-import RoomDetailsBookingPage from './component/booking_rooms/RoomDetailsPage';
-import FindBookingPage from './component/booking_rooms/FindBookingPage';
+import AllRoomsPage from './component/booking_rooms/AllEvents/AllEvents';
+import RoomDetailsBookingPage from './component/booking_rooms/EventDetails/EventDetailsPage';
+import FindBookingPage from './component/booking_rooms/MyEventPage/FindBookingPage';
 import AdminPage from './component/admin/AdminPage';
 import ManageRoomPage from './component/admin/ManageRoomPage';
 import EditRoomPage from './component/admin/EditRoomPage';
@@ -20,6 +20,10 @@ import EditBookingPage from './component/admin/EditBookingPage';
 import ProfilePage from './component/profile/ProfilePage';
 import EditProfilePage from './component/profile/EditProfilePage';
 import { ProtectedRoute, AdminRoute } from './service/guard';
+import '@fontsource/delius';
+import AllEventsPage from "./component/booking_rooms/AllEvents/AllEvents";
+import EventDetailsPage from "./component/booking_rooms/EventDetails/EventDetailsPage";
+import 'leaflet/dist/leaflet.css';
 
 function App() {
   return (
@@ -32,12 +36,12 @@ function App() {
             <Route exact path="/home" element={<HomePage />} />
             <Route exact path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/rooms" element={<AllRoomsPage />} />
+            <Route path="/events" element={<AllEventsPage />} />
             <Route path="/find-booking" element={<FindBookingPage />} />
 
             {/* Protected Routes */}
-            <Route path="/room-details-book/:roomId"
-              element={<ProtectedRoute element={<RoomDetailsBookingPage />} />}
+            <Route path="/events/:eventId"
+              element={<ProtectedRoute element={<EventDetailsPage />} />}
             />
             <Route path="/profile"
               element={<ProtectedRoute element={<ProfilePage />} />}
